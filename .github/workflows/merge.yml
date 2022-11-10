@@ -14,6 +14,14 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-22.04
+    env:
+      GITHUB_CONTEXT: ${{ toJson(github) }}
+    steps:
+      - name: print github context
+        run: echo "$GITHUB_CONTEXT"
   # This workflow contains a single job called "build"
   merge_job:
     # this job will only run if the PR has been merged
