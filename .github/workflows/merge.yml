@@ -33,6 +33,6 @@ jobs:
       with:
         state: "closed"
     - run: echo "Your PR is ${ steps.findPr.outputs.pr }"
-      if: steps.findPr.outputs.number
+      # if: steps.findPr.outputs.number
       env:
         PR: ${{ steps.findPr.outputs.pr }}
