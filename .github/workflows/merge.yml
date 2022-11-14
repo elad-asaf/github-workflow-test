@@ -30,7 +30,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: jwalton/gh-find-current-pr@v1
-      id: "myTestFinder"
+      id: "findPr"
       with:
         state: "all"
     - run: echo "Your PR is ${{ steps.findPr.outputs.pr }}"
