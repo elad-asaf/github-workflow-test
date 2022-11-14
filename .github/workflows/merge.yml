@@ -22,10 +22,8 @@ jobs:
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
     steps:
-      - name: print github context
-        id: test-step
+      - id: test-step
         run: echo "test=1234" >> $GITHUB_OUTPUT
-  # This workflow contains a single job called "build"
   merge_job:
     # this job will only run if the PR has been merged
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
