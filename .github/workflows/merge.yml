@@ -31,8 +31,8 @@ jobs:
     - uses: jwalton/gh-find-current-pr@v1
       id: "myTestFinder"
       with:
-        state: "closed"
-    - run: echo "Your PR is ${{ PR }}"
-      # if: steps.findPr.outputs.number
+        state: "all"
+    - run: echo "Your PR is ${PR}"
+      if: success() && steps.findPr.outputs.number
       env:
         PR: ${{ steps.findPr.outputs.pr }}
