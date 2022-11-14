@@ -28,5 +28,11 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo PR ${{ github.event.number }} has been merged!!
+    - uses: jwalton/gh-find-current-pr@v1
+      id: "myTestFinder"
+      with:
+        state: "closed"
+    - run: echo "Your PR is ${PR}"
+      if: success() && steps.findPr.outputs.number
+      env:
+        PR: ${{ steps.findPr.outputs.pr }}
