@@ -32,7 +32,7 @@ jobs:
       id: "myTestFinder"
       with:
         state: "closed"
-    - run: echo "Your PR is ${PR}"
-      if: success() && steps.findPr.outputs.number
+    - run: echo "Your PR is ${ steps.findPr.outputs.pr }"
+      if: steps.findPr.outputs.number
       env:
         PR: ${{ steps.findPr.outputs.pr }}
