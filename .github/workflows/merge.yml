@@ -17,21 +17,24 @@ jobs:
   prepare:
     name: Prepare
     runs-on: ubuntu-22.04
+    outputs:
+      output_test: ${{ steps.test-step.outputs.test }}
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
     steps:
       - name: print github context
-        run: echo "$GITHUB_CONTEXT"
+        id: test-step
+        run: echo "test=1234" >> $GITHUB_OUTPUT
   # This workflow contains a single job called "build"
   merge_job:
     # this job will only run if the PR has been merged
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-    # - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
     - uses: jwalton/gh-find-current-pr@v1
       id: "findPr"
       with:
         state: "closed"
-    - run: echo "Your PR is ${{ steps.findPr.outputs.pr }}"
+    - run: echo "Your PR is ${{ steps.findPr.outputs.pr }} {{ needs.prepare.outputs.output_test }}"
       # if: success() && steps.findPr.outputs.number
