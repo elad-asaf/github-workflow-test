@@ -26,13 +26,8 @@ jobs:
         run: echo "test=1234" >> $GITHUB_OUTPUT
   merge_job:
     # this job will only run if the PR has been merged
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: jwalton/gh-find-current-pr@v1
-      id: "findPr"
-      with:
-        state: "closed"
-    - run: echo "Your PR is ${{ needs.prepare.outputs.output_test }} ${{ steps.findPr.outputs.pr }} !"
+    - run: echo "Your PR is ${{ github.event.number }} !"
       # if: success() && steps.findPr.outputs.number
