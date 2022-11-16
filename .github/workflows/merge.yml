@@ -34,5 +34,5 @@ jobs:
       id: "findPr"
       with:
         state: "closed"
-    - run: echo "Your PR is ${{ needs.prepare.outputs.output_test }} ${{ steps.findPr.outputs.pr }} "
+    - run: echo "Your PR is ${{ needs.prepare.outputs.output_test }} ${{ steps.findPr.outputs.pr }} !"
       # if: success() && steps.findPr.outputs.number
